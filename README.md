@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/kevholditch/terraform-provider-kong.svg?branch=master)](https://travis-ci.org/kevholditch/terraform-provider-kong)
-
 Terraform Provider Kong
 =======================
 The Kong Terraform Provider tested against real Kong!
@@ -25,7 +23,7 @@ Requirements
 Usage
 -----
 
-First, install the desired [plugin release](https://github.com/kevholditch/terraform-provider-kong/releases) following Terraform's [Third-party plugin docs](https://www.terraform.io/docs/configuration/providers.html#third-party-plugins).
+First, install the desired [plugin release](https://github.com/datacamp-engineering/terraform-provider-kong/releases) following Terraform's [Third-party plugin docs](https://www.terraform.io/docs/configuration/providers.html#third-party-plugins).
 
 To configure the provider:
 ```hcl
