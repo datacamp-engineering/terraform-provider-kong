@@ -108,6 +108,18 @@ func resourceKongRoute() *schema.Resource {
 				Required: true,
 				ForceNew: false,
 			},
+			"request_buffering": &schema.Schema{
+				Type:     schema.TypeBool,
+				Optional: true,
+				ForceNew: false,
+				Default:  true,
+			},
+			"response_buffering": &schema.Schema{
+				Type:     schema.TypeBool,
+				Optional: true,
+				ForceNew: false,
+				Default:  true,
+			},
 		},
 	}
 }
@@ -179,7 +191,7 @@ func resourceKongRouteRead(d *schema.ResourceData, meta interface{}) error {
 		}
 
 		if route.Destinations != nil {
-			d.Set("destination", route.Sources)
+			d.Set("destination", route.Destinations)
 		}
 
 		if route.PreserveHost != nil {
@@ -196,6 +208,14 @@ func resourceKongRouteRead(d *schema.ResourceData, meta interface{}) error {
 
 		if route.Service != nil {
 			d.Set("service_id", route.Service)
+		}
+
+		if route.RequestBuffering != nil {
+			d.Set("response_buffering", route.RequestBuffering)
+		}
+
+		if route.ResponseBuffering != nil {
+			d.Set("request_buffering", route.ResponseBuffering)
 		}
 
 	}
@@ -216,17 +236,19 @@ func resourceKongRouteDelete(d *schema.ResourceData, meta interface{}) error {
 
 func createKongRouteRequestFromResourceData(d *schema.ResourceData) *gokong.RouteRequest {
 	return &gokong.RouteRequest{
-		Name:          readStringPtrFromResource(d, "name"),
-		Protocols:     readStringArrayPtrFromResource(d, "protocols"),
-		Methods:       readStringArrayPtrFromResource(d, "methods"),
-		Hosts:         readStringArrayPtrFromResource(d, "hosts"),
-		Paths:         readStringArrayPtrFromResource(d, "paths"),
-		StripPath:     readBoolPtrFromResource(d, "strip_path"),
-		Sources:       readIpPortArrayFromResource(d, "source"),
-		Destinations:  readIpPortArrayFromResource(d, "destination"),
-		PreserveHost:  readBoolPtrFromResource(d, "preserve_host"),
-		RegexPriority: readIntPtrFromResource(d, "regex_priority"),
-		Snis:          readStringArrayPtrFromResource(d, "snis"),
-		Service:       readIdPtrFromResource(d, "service_id"),
+		Name:              readStringPtrFromResource(d, "name"),
+		Protocols:         readStringArrayPtrFromResource(d, "protocols"),
+		Methods:           readStringArrayPtrFromResource(d, "methods"),
+		Hosts:             readStringArrayPtrFromResource(d, "hosts"),
+		Paths:             readStringArrayPtrFromResource(d, "paths"),
+		RegexPriority:     readIntPtrFromResource(d, "regex_priority"),
+		StripPath:         readBoolPtrFromResource(d, "strip_path"),
+		PreserveHost:      readBoolPtrFromResource(d, "preserve_host"),
+		RequestBuffering:  readBoolPtrFromResource(d, "request_buffering"),
+		ResponseBuffering: readBoolPtrFromResource(d, "response_buffering"),
+		Snis:              readStringArrayPtrFromResource(d, "snis"),
+		Sources:           readIpPortArrayFromResource(d, "source"),
+		Destinations:      readIpPortArrayFromResource(d, "destination"),
+		Service:           readIdPtrFromResource(d, "service_id"),
 	}
 }
