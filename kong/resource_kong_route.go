@@ -211,11 +211,11 @@ func resourceKongRouteRead(d *schema.ResourceData, meta interface{}) error {
 		}
 
 		if route.RequestBuffering != nil {
-			d.Set("response_buffering", route.RequestBuffering)
+			d.Set("request_buffering", route.RequestBuffering)
 		}
 
 		if route.ResponseBuffering != nil {
-			d.Set("request_buffering", route.ResponseBuffering)
+			d.Set("response_buffering", route.ResponseBuffering)
 		}
 
 	}
