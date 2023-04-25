@@ -13,3 +13,5 @@ require (
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	gotest.tools v2.2.0+incompatible // indirect
 )
+
+replace github.com/kevholditch/gokong => github.com/datacamp-engineering/gokong v0.0.0-20230425130849-100c6c84c8d9
