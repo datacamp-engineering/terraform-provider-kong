@@ -1,0 +1,24 @@
+version: '2.1'
+orbs:
+  go: circleci/go@1.7.3
+jobs:
+  build:
+    executor:
+      name: go/default
+      tag: '1.12'
+    steps:
+      - checkout
+      - run:
+          command: |
+            sudo apt update
+            sudo apt install ca-certificates libgnutls30 -y
+            go build .
+          environment:
+            GOOS: linux
+            GOARCH: amd64
+      - store_artifacts:
+          path: ./terraform-provider-kong
+workflows:
+  main:
+    jobs:
+      - build
