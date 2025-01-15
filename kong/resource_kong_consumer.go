@@ -28,6 +28,12 @@ func resourceKongConsumer() *schema.Resource {
 				Optional: true,
 				ForceNew: false,
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: false,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 	}
 }
@@ -75,6 +81,7 @@ func resourceKongConsumerRead(d *schema.ResourceData, meta interface{}) error {
 	} else {
 		d.Set("username", consumer.Username)
 		d.Set("custom_id", consumer.CustomId)
+		d.Set("tags", consumer.Tags)
 	}
 
 	return nil
@@ -97,6 +104,7 @@ func createKongConsumerRequestFromResourceData(d *schema.ResourceData) *gokong.C
 
 	consumerRequest.Username = readStringFromResource(d, "username")
 	consumerRequest.CustomId = readStringFromResource(d, "custom_id")
+	consumerRequest.Tags = readArrayFromResource(d, "tags")
 
 	return consumerRequest
 }

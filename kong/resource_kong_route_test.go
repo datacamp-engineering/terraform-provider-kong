@@ -25,6 +25,7 @@ func TestAccKongRoute(t *testing.T) {
 					resource.TestCheckResourceAttr("kong_route.route", "strip_path", "true"),
 					resource.TestCheckResourceAttr("kong_route.route", "preserve_host", "false"),
 					resource.TestCheckResourceAttr("kong_route.route", "regex_priority", "1"),
+					resource.TestCheckResourceAttr("kong_route.route", "tag.0", "tag-1"),
 				),
 			},
 			{
@@ -166,6 +167,7 @@ resource "kong_route" "route" {
 	preserve_host 	= false
 	regex_priority  = 1
 	service_id  	= "${kong_service.service.id}"
+	tag 			= [ "tag-1" ]
 }
 `
 const testUpdateRouteConfig = `

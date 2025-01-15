@@ -108,6 +108,12 @@ func resourceKongRoute() *schema.Resource {
 				Required: true,
 				ForceNew: false,
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: false,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 	}
 }
@@ -198,6 +204,10 @@ func resourceKongRouteRead(d *schema.ResourceData, meta interface{}) error {
 			d.Set("service_id", route.Service)
 		}
 
+		if route.Tags != nil {
+			d.Set("tags", gokong.StringValueSlice(route.Tags))
+		}
+
 	}
 
 	return nil
@@ -228,5 +238,6 @@ func createKongRouteRequestFromResourceData(d *schema.ResourceData) *gokong.Rout
 		RegexPriority: readIntPtrFromResource(d, "regex_priority"),
 		Snis:          readStringArrayPtrFromResource(d, "snis"),
 		Service:       readIdPtrFromResource(d, "service_id"),
+		Tags:          readStringArrayPtrFromResource(d, "tags"),
 	}
 }
