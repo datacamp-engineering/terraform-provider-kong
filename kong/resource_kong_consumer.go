@@ -104,7 +104,7 @@ func createKongConsumerRequestFromResourceData(d *schema.ResourceData) *gokong.C
 
 	consumerRequest.Username = readStringFromResource(d, "username")
 	consumerRequest.CustomId = readStringFromResource(d, "custom_id")
-	consumerRequest.Tags = readArrayFromResource(d, "tags")
+	consumerRequest.Tags = readStringArrayPtrFromResource(d, "tags")
 
 	return consumerRequest
 }

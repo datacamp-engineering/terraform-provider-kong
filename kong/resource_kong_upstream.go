@@ -336,7 +336,7 @@ func createKongUpstreamRequestFromResourceData(d *schema.ResourceData) *gokong.U
 	upstreamRequest.HashFallbackHeader = readStringFromResource(d, "hash_fallback_header")
 	upstreamRequest.HashOnCookie = readStringFromResource(d, "hash_on_cookie")
 	upstreamRequest.HashOnCookiePath = readStringFromResource(d, "hash_on_cookie_path")
-	upstreamRequest.Tags = readStringArrayFromResource(d, "tags")
+	upstreamRequest.Tags = readStringArrayPtrFromResource(d, "tags")
 
 	if healthChecksArray := readArrayFromResource(d, "healthchecks"); healthChecksArray != nil && len(healthChecksArray) > 0 {
 		healthChecksMap := healthChecksArray[0].(map[string]interface{})
