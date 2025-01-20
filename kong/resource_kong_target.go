@@ -33,6 +33,12 @@ func resourceKongTarget() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 	}
 }

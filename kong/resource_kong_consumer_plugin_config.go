@@ -50,7 +50,7 @@ func resourceKongConsumerPluginConfig() *schema.Resource {
 			"tags": &schema.Schema{
 				Type:     schema.TypeList,
 				Optional: true,
-				ForceNew: false,
+				ForceNew: true,
 				Elem:     &schema.Schema{Type: schema.TypeString},
 			},
 		},
