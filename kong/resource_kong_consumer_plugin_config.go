@@ -47,6 +47,12 @@ func resourceKongConsumerPluginConfig() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 	}
 }
@@ -111,8 +117,9 @@ func resourceKongConsumerPluginConfigCreate(d *schema.ResourceData, meta interfa
 	consumerId := readStringFromResource(d, "consumer_id")
 	pluginName := readStringFromResource(d, "plugin_name")
 	configJson := readStringFromResource(d, "config_json")
+	tags := readStringArrayPtrFromResource(d, "tags")
 
-	consumerPluginConfig, err := meta.(*config).adminClient.Consumers().CreatePluginConfig(consumerId, pluginName, configJson)
+	consumerPluginConfig, err := meta.(*config).adminClient.Consumers().CreatePluginConfig(consumerId, pluginName, configJson, tags)
 	if err != nil {
 		return fmt.Errorf("failed to create kong consumer plugin config, error: %v", err)
 	}
@@ -152,6 +159,7 @@ func resourceKongConsumerPluginConfigRead(d *schema.ResourceData, meta interface
 
 	d.Set("consumer_id", idFields.consumerId)
 	d.Set("plugin_name", idFields.pluginName)
+	d.Set("tags", consumerPluginConfig.Tags)
 
 	// We sync this property from upstream as a method to allow you to import a resource with the config tracked in
 	// terraform state. We do not track `config` as it will be a source of a perpetual diff.

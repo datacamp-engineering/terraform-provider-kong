@@ -33,6 +33,12 @@ func resourceKongTarget() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 	}
 }
@@ -53,7 +59,6 @@ func resourceKongTargetCreate(d *schema.ResourceData, meta interface{}) error {
 }
 
 func resourceKongTargetRead(d *schema.ResourceData, meta interface{}) error {
-
 	var ids = strings.Split(d.Id(), "/")
 
 	// First check if the upstream exists. If it does not then the target no longer exists either.
@@ -63,7 +68,6 @@ func resourceKongTargetRead(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	targets, err := meta.(*config).adminClient.Targets().GetTargetsFromUpstreamId(ids[0])
-
 	if err != nil {
 		return fmt.Errorf("could not find kong target: %v", err)
 	}
@@ -76,6 +80,13 @@ func resourceKongTargetRead(d *schema.ResourceData, meta interface{}) error {
 				d.Set("target", element.Target)
 				d.Set("weight", element.Weight)
 				d.Set("upstream_id", element.Upstream)
+
+				// Set tags if available
+				if element.Tags != nil {
+					d.Set("tags", gokong.StringValueSlice(element.Tags))
+				} else {
+					d.Set("tags", nil)
+				}
 			}
 		}
 	}
@@ -97,5 +108,6 @@ func createKongTargetRequestFromResourceData(d *schema.ResourceData) *gokong.Tar
 	return &gokong.TargetRequest{
 		Target: readStringFromResource(d, "target"),
 		Weight: readIntFromResource(d, "weight"),
+		Tags:   readStringArrayPtrFromResource(d, "tags"),
 	}
 }

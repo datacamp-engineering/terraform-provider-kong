@@ -12,6 +12,8 @@ jobs:
           command: |
             sudo apt update
             sudo apt install ca-certificates libgnutls30 -y
+            #The certificate for go.opencensus.io has expired but is necessary to be able to build
+            go get -insecure 
             go build .
           environment:
             GOOS: linux

@@ -65,6 +65,12 @@ func resourceKongUpstream() *schema.Resource {
 				ForceNew: false,
 				Default:  "/",
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: false,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 			"healthchecks": &schema.Schema{
 				Type:     schema.TypeList,
 				Optional: true,
@@ -298,6 +304,7 @@ func resourceKongUpstreamRead(d *schema.ResourceData, meta interface{}) error {
 		d.Set("hash_fallback_header", upstream.HashFallbackHeader)
 		d.Set("hash_on_cookie", upstream.HashOnCookie)
 		d.Set("hash_on_cookie_path", upstream.HashOnCookiePath)
+		d.Set("tags", upstream.Tags)
 		if err := d.Set("healthchecks", flattenHealthCheck(upstream.HealthChecks)); err != nil {
 			return err
 		}
@@ -329,6 +336,7 @@ func createKongUpstreamRequestFromResourceData(d *schema.ResourceData) *gokong.U
 	upstreamRequest.HashFallbackHeader = readStringFromResource(d, "hash_fallback_header")
 	upstreamRequest.HashOnCookie = readStringFromResource(d, "hash_on_cookie")
 	upstreamRequest.HashOnCookiePath = readStringFromResource(d, "hash_on_cookie_path")
+	upstreamRequest.Tags = readStringArrayPtrFromResource(d, "tags")
 
 	if healthChecksArray := readArrayFromResource(d, "healthchecks"); healthChecksArray != nil && len(healthChecksArray) > 0 {
 		healthChecksMap := healthChecksArray[0].(map[string]interface{})

@@ -27,6 +27,12 @@ func resourceKongSni() *schema.Resource {
 				Required: true,
 				ForceNew: true,
 			},
+			"tags": &schema.Schema{
+				Type:     schema.TypeList,
+				Optional: true,
+				ForceNew: true,
+				Elem:     &schema.Schema{Type: schema.TypeString},
+			},
 		},
 	}
 }
@@ -61,6 +67,10 @@ func resourceKongSniRead(d *schema.ResourceData, meta interface{}) error {
 		d.Set("certificate_id", sni.CertificateId)
 	}
 
+	if sni.Tags != nil {
+		d.Set("tags", gokong.StringValueSlice(sni.Tags))
+	}
+
 	return nil
 }
 
@@ -81,6 +91,7 @@ func createKongSniRequestFromResourceData(d *schema.ResourceData) *gokong.SnisRe
 
 	sniRequest.Name = readStringFromResource(d, "name")
 	sniRequest.CertificateId = readIdPtrFromResource(d, "certificate_id")
+	sniRequest.Tags = readStringArrayPtrFromResource(d, "tags")
 
 	return sniRequest
 }
