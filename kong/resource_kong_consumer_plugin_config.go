@@ -159,7 +159,6 @@ func resourceKongConsumerPluginConfigRead(d *schema.ResourceData, meta interface
 
 	d.Set("consumer_id", idFields.consumerId)
 	d.Set("plugin_name", idFields.pluginName)
-	d.Set("tags", consumerPluginConfig.Tags)
 
 	// We sync this property from upstream as a method to allow you to import a resource with the config tracked in
 	// terraform state. We do not track `config` as it will be a source of a perpetual diff.
