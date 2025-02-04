@@ -14,4 +14,4 @@ require (
 	gotest.tools v2.2.0+incompatible // indirect
 )
 
-replace github.com/kevholditch/gokong => github.com/datacamp-engineering/gokong v1.9.1-0.20250204122644-3eb974415845
+replace github.com/kevholditch/gokong => github.com/datacamp-engineering/gokong v1.9.1-0.20250204123635-45e67f28fe26
