@@ -76,8 +76,8 @@ github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod h1:M8M6+tZqaGX
 github.com/containerd/continuity v0.0.0-20190827140505-75bee3e2ccb6 h1:NmTXa/uVnDyp0TY5MKi197+3HWcnYWfnHGyaFthlnGw=
 github.com/containerd/continuity v0.0.0-20190827140505-75bee3e2ccb6/go.mod h1:GL3xCUCBDV3CZiTSEKksMWbLE66hEyuu9qyDOOqM47Y=
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
-github.com/datacamp-engineering/gokong v1.9.1-0.20250204123635-45e67f28fe26 h1:8nc00UVHtd5ddCJtyCvuZoEmc49mGFW83pj1/tENlNs=
-github.com/datacamp-engineering/gokong v1.9.1-0.20250204123635-45e67f28fe26/go.mod h1:/yPEclE0cTiGmrhJK8Un8tHP1ZQ3hty35tTdbwYaXqw=
+github.com/datacamp-engineering/gokong v1.9.1-0.20250204134117-b896da55b4ba h1:tXDOpR5CWLrfTIWnGT7Uje1Ps4zaUQ4+q/j2uo4Ul90=
+github.com/datacamp-engineering/gokong v1.9.1-0.20250204134117-b896da55b4ba/go.mod h1:/yPEclE0cTiGmrhJK8Un8tHP1ZQ3hty35tTdbwYaXqw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

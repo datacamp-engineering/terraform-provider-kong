@@ -117,8 +117,9 @@ func resourceKongConsumerPluginConfigCreate(d *schema.ResourceData, meta interfa
 	consumerId := readStringFromResource(d, "consumer_id")
 	pluginName := readStringFromResource(d, "plugin_name")
 	configJson := readStringFromResource(d, "config_json")
+	tags := readStringArrayPtrFromResource(d, "tags")
 
-	consumerPluginConfig, err := meta.(*config).adminClient.Consumers().CreatePluginConfig(consumerId, pluginName, configJson)
+	consumerPluginConfig, err := meta.(*config).adminClient.Consumers().CreatePluginConfig(consumerId, pluginName, configJson, tags)
 	if err != nil {
 		return fmt.Errorf("failed to create kong consumer plugin config, error: %v", err)
 	}
