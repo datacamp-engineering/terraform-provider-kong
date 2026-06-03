@@ -1,5 +1,6 @@
 version: '2.1'
 orbs:
+  techdocs: datacamp/techdocs@0.0.1
   go: circleci/go@1.7.3
 jobs:
   build:
@@ -24,3 +25,19 @@ workflows:
   main:
     jobs:
       - build
+  techdocs:
+    jobs:
+      - techdocs/publish:
+          name: techdocs-staging
+          context: org-global
+          environment: staging
+          filters:
+            branches:
+              ignore: [master, main]
+      - techdocs/publish:
+          name: techdocs-prod
+          context: org-global
+          environment: prod
+          filters:
+            branches:
+              only: [master, main]
