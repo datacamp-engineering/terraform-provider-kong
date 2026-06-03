@@ -1,0 +1,18 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  description: "Terraform module for provider-kong"
+  name: "terraform-provider-kong"
+  annotations:
+    github.com/project-slug: "datacamp-engineering/terraform-provider-kong"
+    circleci.com/project-slug: "github/datacamp-engineering/terraform-provider-kong"
+    sentry.io/project-slug: "terraform-provider-kong"
+    sonarqube.org/project-key: "datacamp-engineering_terraform-provider-kong"
+    backstage.io/techdocs-ref: "dir:."
+  tags:
+    - managed-by-platform-metadata
+spec:
+  lifecycle: "actively-developed"
+  owner: "infra"
+  type: "library"
